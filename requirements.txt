@@ -1,2 +1,8 @@
+openai
+torch
 PyPDF2
-requests
+ollama
+pyyaml
+beautifulsoup4
+lxml
+python-dotenv
