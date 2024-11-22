@@ -17,6 +17,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Ollama Chat")
     parser.add_argument("--model", default="llama3.2:1b", help="Ollama model to use (default: llama3.2:1b)")
     parser.add_argument("--no-rag", action="store_false", dest="rag", help="Start script without localrag")
+    parser.add_argument("--temperature", type=float, help="Temperature setting for the model")
     args = parser.parse_args()
 
     vault_content = []
@@ -53,5 +54,6 @@ if __name__ == "__main__":
         if user_input.lower() == 'quit':
             break
         
-        response = ollama_chat(user_input, system_message, vault_embeddings_tensor, vault_content, args.model, conversation_history)
+        response = ollama_chat(user_input, system_message, vault_embeddings_tensor, vault_content, 
+                       args.model, conversation_history, temperature=args.temperature)
         print(GREEN + "Response: \n\n" + response + RESET_COLOR)

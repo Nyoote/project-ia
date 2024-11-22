@@ -59,7 +59,7 @@ def rewrite_query(user_input_json, conversation_history, ollama_model):
     rewritten_query = response.choices[0].message.content.strip()
     return json.dumps({"Rewritten Query": rewritten_query})
    
-def ollama_chat(user_input, system_message, vault_embeddings, vault_content, ollama_model, conversation_history):
+def ollama_chat(user_input, system_message, vault_embeddings, vault_content, ollama_model, conversation_history, temperature=0.7):
     conversation_history.append({"role": "user", "content": user_input})
     
     if len(conversation_history) > 1:
@@ -97,6 +97,7 @@ def ollama_chat(user_input, system_message, vault_embeddings, vault_content, oll
         model=ollama_model,
         messages=messages,
         max_tokens=2000,
+        temperature=temperature
     )
     
     conversation_history.append({"role": "assistant", "content": response.choices[0].message.content})
